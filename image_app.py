@@ -1,7 +1,7 @@
 import cv2
 import tkinter as tk
 
-from tkinter import filedialog
+from tkinter import filedialog, ttk
 from PIL import Image, ImageTk
 from abc import abstractmethod
 
@@ -25,11 +25,15 @@ class ImageProcessingApp:
         self.btn_load = tk.Button(root, text="Wczytaj obraz", command=self.load_image)
         self.btn_load.pack()
 
-        self.btn_save = tk.Button(root, text="Zapisz wynik", command=self.save_image)
+        self.btn_save = tk.Button(root, text="Zapisz obraz", command=self.save_image)
         self.btn_save.pack()
         
         self.image_label = tk.Label(root)
         self.image_label.pack()
+
+        self.progress = ttk.Progressbar(root, orient="horizontal", length=300, mode="determinate")
+        self.progress.pack()
+        self.progress["value"] = 0  # Startowa wartość
 
         self.original_image = None
         self.result_image = None
@@ -116,3 +120,13 @@ class ImageProcessingApp:
             if file_path:
                 cv2.imwrite(file_path, self.result_image)
                 print("Zapisano:", file_path)
+
+    def update_progress(self, value):
+        """
+        Updates the progress bar with the given value.
+
+        Args:
+            value (int): The new value to set for the progress bar.
+        """
+        self.progress["value"] = value
+        self.root.update_idletasks()

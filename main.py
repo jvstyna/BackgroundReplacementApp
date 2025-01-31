@@ -1,7 +1,9 @@
 import cv2
 import tkinter as tk
-from PIL import Image
+import time
 import numpy as np
+
+from PIL import Image
 from transformers import pipeline
 
 from image_app import ImageProcessingApp
@@ -23,7 +25,8 @@ class BackgroundReplacementApp(ImageProcessingApp):
         super().__init__(root)
         self.root.title("Wymiana tła - GUI")
         self.pipe = pipeline("image-segmentation", model="briaai/RMBG-1.4", trust_remote_code=True)
-        
+
+
         self.btn_bg1 = tk.Button(root, text="Tło 1", command=lambda: self.process_image("01_bg.png"))
         self.btn_bg2 = tk.Button(root, text="Tło 2", command=lambda: self.process_image("02_bg.png"))
         self.btn_bg3 = tk.Button(root, text="Tło 3", command=lambda: self.process_image("03_bg.png"))
@@ -59,14 +62,20 @@ class BackgroundReplacementApp(ImageProcessingApp):
         """
         if self.original_image is None:
             return
-        
+        self.update_progress(30)
         background =  np.array(Image.open(bg_path))
         background = cv2.resize(background, (self.original_image.shape[1], self.original_image.shape[0]))
-
+        self.update_progress(60)
         mask = np.asarray(self.mask)
         mask = (mask > 0.5).astype(np.uint8)
+        time.sleep(0.5)
         self.result_image = mask[:, :, np.newaxis] * self.original_image + (1 - mask[:, :, np.newaxis]) * background
+        self.update_progress(90)
+        time.sleep(0.5)  
         self.display_image(self.result_image)
+        self.update_progress(100)
+        time.sleep(0.5)
+        self.update_progress(0)
 
 
 if __name__ == "__main__":
