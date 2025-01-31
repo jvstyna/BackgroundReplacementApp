@@ -38,8 +38,8 @@ class ImageProcessingApp:
         self.original_image = None
         self.result_image = None
 
-        self.max_width = 1000
-        self.max_height = 1000
+        self.max_width = 800
+        self.max_height = 800
 
     def load_image(self):
         """
