@@ -34,15 +34,15 @@ This project is a GUI application for background replacement in images. It uses 
     ```
 
 The Application GUI looks like that:
-![alt text](image.png)
+![alt text](screenshots/image.png)
 
 Click on the `Wczytaj obraz` to read image that you want to replace background in.
 
-![alt text](image-1.png)
+![alt text](screenshots/image-1.png)
 
 If the image is properly read it will display on the screen.
 Choose background to put from `Tło 1`, `Tło 2`, `Tło 3`.
 
-![alt text](image-2.png)
+![alt text](screenshots/image-2.png)
 
 Save the new image in the directory you choose by clicking `Zapisz wynik`.

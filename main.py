@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 from transformers import pipeline
 
-from image_app import ImageProcessingApp
+from source.image_app import ImageProcessingApp
 
 class BackgroundReplacementApp(ImageProcessingApp):
     """
@@ -27,9 +27,9 @@ class BackgroundReplacementApp(ImageProcessingApp):
         self.pipe = pipeline("image-segmentation", model="briaai/RMBG-1.4", trust_remote_code=True)
 
 
-        self.btn_bg1 = tk.Button(root, text="Tło 1", command=lambda: self.process_image("01_bg.png"))
-        self.btn_bg2 = tk.Button(root, text="Tło 2", command=lambda: self.process_image("02_bg.png"))
-        self.btn_bg3 = tk.Button(root, text="Tło 3", command=lambda: self.process_image("03_bg.png"))
+        self.btn_bg1 = tk.Button(root, text="Tło 1", command=lambda: self.process_image("backgrounds/01_bg.png"))
+        self.btn_bg2 = tk.Button(root, text="Tło 2", command=lambda: self.process_image("backgrounds/02_bg.png"))
+        self.btn_bg3 = tk.Button(root, text="Tło 3", command=lambda: self.process_image("backgrounds/03_bg.png"))
 
         self.btn_bg1.pack()
         self.btn_bg2.pack()
